@@ -1,93 +1,73 @@
-Fuel Consumption Prediction
+Ship Fuel Consumption Prediction (SIH)
+Overview
+This project focuses on predicting ship fuel consumption based on the mean draft of the ship. A machine learning model is trained using Lasso regression to provide accurate predictions.
+
 Table of Contents
-Project Overview
+Project Structure
 Features
-Technologies Used
-File Structure
 Installation
 Usage
-Example
-Future Enhancements
-Contributing
+Model Details
+Dataset
+Results
 License
-Project Overview
-This project focuses on predicting fuel consumption for ships based on various operational and environmental factors. By predicting fuel usage, it helps optimize ship routes, reduce fuel costs, and improve overall operational efficiency. The project leverages machine learning models, primarily regression, to analyze historical data and forecast future fuel consumption.
-
+Project Structure
+php
+Copy code
+ship_fuel_sih/
+├── app/
+│   ├── templates/
+│   │   └── index.html
+│   ├── static/
+│   ├── model/
+│   │   └── lasso_model.sav
+│   ├── app.py
+│   └── requirements.txt
+├── notebooks/
+│   └── ship_fuel_sih.ipynb  # Jupyter notebook for model development
+└── README.md
 Features
-Fuel Consumption Prediction: Accurate fuel consumption estimation using regression models.
-Data-Driven Insights: Provides insights into how different factors like speed, weight, and weather conditions influence fuel usage.
-Operational Efficiency: Helps optimize ship operations by enabling data-backed decision-making.
-Technologies Used
-Python: Primary programming language.
-NumPy: For numerical operations.
-Pandas: For data manipulation and analysis.
-Scikit-learn: For implementing regression models.
-File Structure
-The following files are included in this repository:
-
-bash
-Copy code
-/fuel-consumption-prediction
-│
-├── ship_fuel_sih.py          # Main script for fuel consumption prediction
-├── README.md                 # Project documentation
-├── requirements.txt          # Python dependencies
-└── data                      # Folder for datasets (optional)
+Fuel Consumption Prediction: Predicts fuel consumption based on the ship’s mean draft using a Lasso regression model.
+Flask Interface: Provides a basic interface for interacting with the model (not yet deployed).
 Installation
-To get started with this project, follow these steps:
-
-Clone the repository:
-
+Prerequisites
+Python 3.12.7 or higher
+Flask
+Scikit-learn
+Pandas
+Numpy
+Clone the Repository
 bash
 Copy code
-git clone https://github.com/yourusername/fuel-consumption-prediction.git
-cd fuel-consumption-prediction
-Install the required dependencies:
-
+git clone https://github.com/yourusername/ship_fuel_sih.git
+cd ship_fuel_sih
+Install Dependencies
 bash
 Copy code
 pip install -r requirements.txt
-Ensure your dataset is available in the correct format (e.g., CSV) for prediction.
-
 Usage
-Running the script:
-
-To run the script and predict fuel consumption, use the following command:
-
+Run Locally
+Ensure the Lasso regression model (lasso_model.sav) is in the model/ folder.
+Start the Flask application:
 bash
 Copy code
-python ship_fuel_sih.py
-Modifying input data:
+python app.py
+Open your web browser and go to http://localhost:5000. Enter the meanDraft to predict the fuel consumption of the ship.
+Use the Jupyter Notebook
+Open notebooks/ship_fuel_sih.ipynb and run the cells to train the model, explore the dataset, and make predictions.
 
-The script uses features such as speed, weight, and environmental conditions to predict fuel consumption. You can modify the input data in the dataset for different predictions.
+Model Details
+Input: meanDraft
+Output: Predicted fuel consumption
+Model: Lasso regression model trained using Python’s Scikit-learn library.
+Training Process
+The model was trained using a dataset that contains records of ship drafts and corresponding fuel consumption. Lasso regression was chosen for its ability to handle overfitting by penalizing less important features.
 
-Example
-Here is a simple example of loading the dataset, training a regression model, and predicting fuel consumption:
+Dataset
+The dataset used for training contains ship draft measurements and corresponding fuel consumption values. This dataset is not included in this repository for privacy and proprietary reasons.
 
-python
-Copy code
-import pandas as pd
-from sklearn.linear_model import LinearRegression
+Results
+The Lasso regression model provides accurate predictions of fuel consumption based solely on the ship’s mean draft. Additional features (e.g., ship speed, cargo weight) can potentially improve the model's accuracy.
 
-# Load your dataset
-data = pd.read_csv('your_dataset.csv')
-
-# Initialize and train the model
-model = LinearRegression()
-model.fit(data[['speed', 'weight']], data['fuel_consumption'])
-
-# Predict fuel consumption
-predicted_fuel = model.predict([[20, 1500]])  # Example input (speed: 20, weight: 1500)
-print(predicted_fuel)
-Future Enhancements
-Integrate real-time environmental data such as weather conditions to improve prediction accuracy.
-Explore more advanced machine learning models like Random Forest or Neural Networks.
-Create a web interface for easier input and fuel consumption prediction.
-Contributing
-Contributions are welcome! Feel free to:
-
-Fork the repository.
-Create a new branch for your features.
-Submit a pull request with a detailed explanation of your changes.
 License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License - see the LICENSE file for details.
